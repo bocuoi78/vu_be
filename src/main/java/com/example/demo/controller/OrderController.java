@@ -37,10 +37,9 @@ public class OrderController {
 
     @GetMapping("/{id}")
     ResponseEntity<ApiResponseDto> getOrder (
-            HttpServletRequest request,
             @PathVariable(name = "id") String orderId
     ) {
-        return new ResponseEntity<>(orderService.getOrder(request, orderId), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.getOrder(orderId), HttpStatus.OK);
     }
 
     @PostMapping

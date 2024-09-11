@@ -103,14 +103,29 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public ApiResponseDto getOrder(HttpServletRequest request, String orderId) {
+    public ApiResponseDto getOrder(String orderId) {
         ApiResponseDto apiResponseDto;
         if(orderRepository.findById(orderId).isPresent()) {
             Order order = orderRepository.findById(orderId).get();
+            OrderResponse orderResponse = OrderResponse.builder()
+                    .id(order.getId())
+                    .studentId(order.getStudent().getId())
+                    .studentName(order.getStudent().getFullname())
+                    .studentClazz(order.getStudent().getClazz())
+                    .birthday(order.getStudent().getBirthday())
+                    .studentGender(order.getStudent().getGender())
+                    .studentPhone(order.getStudent().getPhone())
+                    .studentEmail(order.getStudent().getEmail())
+                    .uniformGender(order.getUniform().getGender())
+                    .uniformSize(order.getUniform().getSizeName())
+                    .paid(order.getPaid())
+                    .transfer(order.getTransfer())
+                    .received(order.getReceived())
+                    .build();
             apiResponseDto = ApiResponseDto.builder()
                     .code(String.format(HttpStatus.OK.toString()))
                     .message("Request successfully")
-                    .data(OrderMapper.getInstance().toDto(order))
+                    .data(orderResponse)
                     .status(CommonConstants.ApiStatus.STATUS_OK)
                     .build();
         } else {

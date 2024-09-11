@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public interface OrderService {
     ApiResponseDto getAllOrders(HttpServletRequest request);
     ApiResponseDto getListOfOrders(OrderRequest orderRequest);
-    ApiResponseDto getOrder(HttpServletRequest request, String orderId);
+    ApiResponseDto getOrder(String orderId);
     ApiResponseDto addOrder(HttpServletRequest request, OrderDto orderDto);
     ApiResponseDto updateOrder(HttpServletRequest request, OrderDto orderDto);
     ApiResponseDto deleteOrder(HttpServletRequest request, String orderId);
